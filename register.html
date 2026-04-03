@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+    <h1 class="brand-title">🐷 Smart Gullak</h1>
+    <p class="tagline">Create Your Digital Gullak</p>
+
+    <h2>Create Account</h2>
+
+    <form action="/create" method="POST">
+        <input type="text" name="acc_no" placeholder="Account Number" required>
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="password" name="pin" placeholder="PIN" required>
+        <button type="submit">Create</button>
+    </form>
+
+    <p>Already have account? <a href="/">Login</a></p>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

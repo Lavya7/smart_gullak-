@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Smart Gullak</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <!-- LEFT BRAND -->
+        <div class="brand">
+            <h1>🐷 Smart Gullak</h1>
+            <p class="tagline">Small Savings. Big Dreams.</p>
+        </div>
+
+        <!-- RIGHT ACCOUNT DETAILS -->
+        <div class="account-details">
+            <h2>{{ account[1] }}</h2>
+            <p>Account No: {{ account[0] }}</p>
+        </div>
+
+    </div>
+
+    <!-- BALANCE CARD -->
+    <div class="balance-card">
+        <h3>Total Savings</h3>
+        <h1>₹ {{ account[3] }}</h1>
+        <p>Your digital gullak balance</p>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+
+        <!-- DEPOSIT -->
+        <div class="action-card">
+            <h3>Deposit Money</h3>
+            <form action="/deposit" method="POST">
+                <input type="number" name="amount" placeholder="Enter amount" required>
+                <button type="submit" class="deposit-btn">Deposit</button>
+            </form>
+        </div>
+
+        <!-- WITHDRAW -->
+        <div class="action-card">
+            <h3>Withdraw Money</h3>
+            <form action="/withdraw" method="POST">
+                <input type="number" name="amount" placeholder="Enter amount" required>
+                <button type="submit" class="withdraw-btn">Withdraw</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- HISTORY -->
+    <div class="history-card">
+        <h3>Transaction History</h3>
+
+        {% if history %}
+            {% for h in history %}
+                <div class="history-item">
+                    <span class="type">{{ h[0] }}</span>
+                    <span class="amount">₹ {{ h[1] }}</span>
+                    <small class="date">{{ h[2] }}</small>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No transactions yet</p>
+        {% endif %}
+    </div>
+
+    <!-- BOTTOM BUTTON AREA -->
+    <div class="bottom-buttons">
+
+        <!-- DELETE LEFT -->
+        <a href="/delete/{{ account[0] }}" 
+           onclick="return confirmDelete()" 
+           class="delete-btn">
+            Delete Account
+        </a>
+
+        <!-- LOGOUT RIGHT -->
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+</div> <!-- dashboard ends -->
+
+
+
+<!-- FLOATING AI CHATBOT -->
+<div class="chat-toggle" onclick="toggleChat()">🤖</div>
+
+<div class="chatbot-popup" id="chatbot">
+    <div class="chat-header">
+        Smart Assistant
+        <span onclick="toggleChat()" class="close-btn">✖</span>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Ask something...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<script>
+function confirmDelete() {
+    return confirm("⚠ Are you sure you want to delete this account?");
+}
+</script>
+
+</body>
+</html>

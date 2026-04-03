@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+    <h1 class="brand-title">🐷 Smart Gullak</h1>
+    <p class="tagline">Small Savings. Big Dreams.</p>
+
+    <h2>Login</h2>
+
+    <form action="/login" method="POST">
+        <input type="text" name="acc_no" placeholder="Account Number" required>
+        <input type="password" name="pin" placeholder="PIN" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have account? <a href="/register">Register</a></p>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
